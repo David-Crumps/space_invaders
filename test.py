@@ -1,16 +1,17 @@
 import pygame
+import os
 
 pygame.init()
 screen = pygame.display.set_mode((1280, 720))
 clock = pygame.time.Clock()
 running = True
 
-invader = pygame.transform.scale(pygame.image.load('invader_5.png'), (80, 80))
-invader2 = pygame.transform.scale(pygame.image.load('invader_2.png'), (80, 80))
-invader3 = pygame.transform.scale(pygame.image.load('invader_3.png'), (80, 80))
+main_dir = os.path.split(os.path.abspath(__file__))[0]
+data_dir = os.path.join(main_dir, 'Data')
+
+invader = pygame.transform.scale(pygame.image.load(os.path.join(data_dir, 'invader.png')), (80, 80))
 invaderRect = invader.get_rect(center=(400, 400))
-invaderRect2 = invader.get_rect(center=(500, 100))
-invaderRect3 = invader.get_rect(center=(640, 360))
+
 
 while running:
     for event in pygame.event.get():
@@ -19,8 +20,6 @@ while running:
         
     screen.fill('black')
     screen.blit(invader, invaderRect)
-    screen.blit(invader2, invaderRect2)
-    screen.blit(invader3, invaderRect3)
 
     pygame.display.flip()
 
