@@ -1,0 +1,8 @@
+{
+  "player": {
+    "player_speed": 450,
+    "player_start_pos": [960, 1030],
+    "player_image": "player.png"
+  },
+  "screen_size": [1920, 1080]
+}
