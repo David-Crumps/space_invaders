@@ -12,7 +12,7 @@ main_dir = os.path.split(os.path.abspath(__file__))[0]
 data_dir = os.path.join(main_dir, 'Data')
 
 invader = pygame.transform.scale(pygame.image.load(os.path.join(data_dir, 'invader.png')), (80, 80))
-invaderPos = invader.get_rect(center=(640, 360))
+invaderPos = invader.get_rect(center=(100, 360))
 
 
 while running:
