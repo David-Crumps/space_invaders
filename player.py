@@ -2,9 +2,13 @@ import pygame
 import os
 
 class Player(pygame.sprite.Sprite):
-    def __init__(self, x, y, image, speed):
+    def __init__(self, start_cords, image, speed):
         super().__init__()
         self.image = image
+
+        x = start_cords[0]
+        y = start_cords[1]
+
         self.rect = self.image.get_rect(center=(x,y))
         self.speed = speed
     
