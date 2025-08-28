@@ -1,6 +1,7 @@
 import pygame
 import os
 import random
+from typing import cast
 
 class Invader(pygame.sprite.Sprite):
     def __init__(self, image, speed):
@@ -18,3 +19,6 @@ class Invader(pygame.sprite.Sprite):
 
         if self.rect.bottom > height:
             self.active = False
+
+
+
