@@ -1,7 +1,9 @@
 import pygame
 import os
 from InvaderSpawnManager import InvaderSpawnManager
-from bullet import *
+from bullet import Bullet
+from invader import Invader
+from utils import collision_detection
 
 
 
@@ -22,19 +24,22 @@ class SpritePool(pygame.sprite.Group):
     def get_all_active_sprites(self):
         return [sprite for sprite in self.sprites() if sprite.active]
     
-    def spawn(self):
+    def spawn(self, *args, **kwargs):
         sprite = self.get_inactive_sprite()
-        active_sprites = self.get_all_active_sprites()
         if sprite:
             if self.spawn_strategy:
-                self.spawn_strategy(sprite, active_sprites)
+                    self.spawn_strategy(sprite, *args, **kwargs)
             sprite.active = True
             return sprite
         return None
-        
     
+    def check_collision(self, group):
+        for sprite in self.sprites():
+            if sprite.active:
+                collision_detection(sprite, group)
+ 
     def update(self, *args, **kwargs):
-        for sprite in self:
+        for sprite in self.sprites():
             if sprite.active:
                 sprite.update(*args, **kwargs)
     
