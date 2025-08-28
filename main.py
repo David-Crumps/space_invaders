@@ -4,6 +4,7 @@ from player import Player
 from invader import Invader
 from sprite_pool import SpritePool
 from InvaderSpawnManager import InvaderSpawnManager
+from bullet import *
 import sys
 import json
 import random
@@ -38,7 +39,14 @@ def main():
     invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), image=invader_img, speed=100)
     invader_group.spawn_all()   
 
+    bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), (30,30))
+    bullet_group = SpritePool(cls=Bullet, size=10, spawn_strategy=bullet_spawn_strat ,image=bullet_img, speed=600)
+
     del player_img, player_speed, player_start_pos
+
+
+    bullet_cooldown = 250
+    last_shot_time = 0
     while True:
         dt = clock.tick(60) / 1000 #Delta time
 
@@ -46,12 +54,21 @@ def main():
             if event.type == pygame.QUIT: sys.exit()
         
         keys = pygame.key.get_pressed() 
+        current_time = pygame.time.get_ticks()
+        if keys[pygame.K_SPACE] and current_time - last_shot_time > bullet_cooldown:
+            bullet_group.spawn_bullet(player)
+            last_shot_time = current_time
+    
         player.update(dt, keys, width)
         invader_group.update(dt, height)
+        bullet_group.update(dt)
+
+
         
         screen.fill('black')
         screen.blit(player.image, player.rect)
         invader_group.draw(screen)
+        bullet_group.draw(screen)
         
         
         pygame.display.flip()
