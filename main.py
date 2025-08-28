@@ -4,7 +4,8 @@ from player import Player
 from invader import Invader
 from sprite_pool import SpritePool
 from InvaderSpawnManager import InvaderSpawnManager
-from bullet import *
+from bullet import Bullet
+from utils import bullet_spawn_strat
 import sys
 import json
 import random
@@ -18,6 +19,10 @@ def open_configs():
     except FileNotFoundError:
         print ("File not found, closing program")
         sys.exit()
+
+#ADD TO CONFIGS, ALSO CREATE A CONFIG.PY WHICH HAS ALL THESE VALUES LOADED TO MAKE MAIN READABLE
+bullet_cooldown = 250
+last_shot_time = 0
 
 
 def main():
@@ -37,7 +42,7 @@ def main():
 
     invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), image=invader_img, speed=150)
     for _ in range(12):
-        invader_group.spawn()
+        invader_group.spawn(invader_group.get_all_active_sprites())
 
     bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), (30,30))
     bullet_group = SpritePool(cls=Bullet, size=10, spawn_strategy=bullet_spawn_strat ,image=bullet_img, speed=600)
@@ -47,21 +52,31 @@ def main():
 
     bullet_cooldown = 250
     last_shot_time = 0
-
     while True:
         dt = clock.tick(60) / 1000
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
 
         keys = pygame.key.get_pressed()
+        current_time = pygame.time.get_ticks()
+        if keys[pygame.K_SPACE] and current_time - last_shot_time > bullet_cooldown:
+            bullet_group.spawn(player)
+            last_shot_time = current_time
+
         for invader in invader_group:
             if not invader.active:
-                invader_group.spawn()
+                invader_group.spawn(invader_group.get_all_active_sprites())
+        
+        invader_group.check_collision(bullet_group)
+        invader_group.update(dt, screen_height, bullet_group)
 
-        invader_group.update(dt, screen_height)
+        player.update(dt, keys, screen_width)
+        bullet_group.update(dt)
 
         screen.fill("black")
         invader_group.draw(screen)
+        screen.blit(player.image, player.rect)
+        bullet_group.draw(screen)
         pygame.display.flip()
 
 if __name__ == "__main__":
