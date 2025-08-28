@@ -24,7 +24,7 @@ def main():
     pygame.init()
     clock = pygame.time.Clock()
     config = open_configs()
-    screen_width, screen_height = config["screen_size"][0], config["screen_size"][1]
+    screen_width, screen_height = config["screen"]["screen_width"], config["screen"]["screen_height"]
     screen = pygame.display.set_mode((screen_width, screen_height))
 
     player_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", config["player"]["player_image"])), (80,80))
@@ -57,7 +57,7 @@ def main():
         for invader in invader_group:
             if not invader.active:
                 invader_group.spawn()
-                
+
         invader_group.update(dt, screen_height)
 
         screen.fill("black")

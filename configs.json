@@ -4,5 +4,12 @@
     "player_start_pos": [960, 1030],
     "player_image": "player.png"
   },
-  "screen_size": [1920, 1080]
+  "screen": {
+    "screen_top_edge": 0,
+    "screen_bottom": 1920,
+    "screen_left": 0,
+    "screen_right": 1080,
+    "screen_width": 1920,
+    "screen_height": 1080
+  }
 }
