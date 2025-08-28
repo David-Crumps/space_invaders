@@ -10,7 +10,7 @@ class Invader(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
 
         self.speed = speed
-        self.active = True
+        self.active = False
         self.health = 1
     
     def update(self, dt, height):
