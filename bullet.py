@@ -7,7 +7,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = image.get_rect()
         self.speed = speed
         self.damage = 1
-        self.active = True
+        self.active = False
     
     def update(self, dt):
         self.rect.move_ip(0, -self.speed*dt)
@@ -15,5 +15,5 @@ class Bullet(pygame.sprite.Sprite):
         if self.rect.top < 0:
             self.active = False
 
-def bullet_spawn_strat(bullet, player):
+def bullet_spawn_strat(bullet, activeSprites , player):
     bullet.rect.midbottom = player.rect.midtop
