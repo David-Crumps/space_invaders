@@ -14,6 +14,3 @@ class Bullet(pygame.sprite.Sprite):
   
         if self.rect.top < 0:
             self.active = False
-
-def bullet_spawn_strat(bullet, activeSprites , player):
-    bullet.rect.midbottom = player.rect.midtop
