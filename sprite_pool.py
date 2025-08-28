@@ -1,6 +1,7 @@
 import pygame
 import os
 from InvaderSpawnManager import InvaderSpawnManager
+from bullet import *
 
 class SpritePool(pygame.sprite.Group):
     def __init__(self, cls, size, spawn_strategy = None, *args, **kwargs):
@@ -25,6 +26,15 @@ class SpritePool(pygame.sprite.Group):
                 if self.spawn_strategy:
                     self.spawn_strategy.shuffle()
                     self.spawn_strategy(sprite)
+                sprite.active = True
+                return sprite
+        return None
+    
+    def spawn_bullet(self, player):
+        for sprite in self.pool:
+            if not sprite.active:
+                if self.spawn_strategy:
+                    self.spawn_strategy(sprite, player)
                 sprite.active = True
                 return sprite
         return None
