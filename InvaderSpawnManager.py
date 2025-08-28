@@ -19,5 +19,5 @@ class InvaderSpawnManager:
                     sprite.rect.center = (x,y)
                     break
         else:
-            sprite.rect.center = self.spawn_loc[0]
+            sprite.rect.center = self.spawn_loc[0] #If there are no active sprites, add a sprite at the first spawn location
         random.shuffle(self.spawn_loc)
