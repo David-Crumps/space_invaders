@@ -4,8 +4,7 @@ from player import Player
 import sys
 import json
 
-main_dir = os.path.split(os.path.abspath(__file__))[0]
-data_dir = os.path.join(main_dir, 'Data')
+
 
 def open_configs():
     try:
@@ -32,7 +31,7 @@ def main():
 
     del player_img, player_speed, player_start_pos
     while True:
-        dt = clock.tick(60) / 1000
+        dt = clock.tick(60) / 1000 #Delta time
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT: sys.exit()
