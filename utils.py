@@ -1,4 +1,5 @@
 import pygame
+from invader import Invader
 
 #move to configs
 slot_width=95 
@@ -11,7 +12,7 @@ barrier_spawn_loc = [(x,y) for x in range(x_min, x_max, slot_width)]
 def collision_detection(sprite, group):
     collisions = pygame.sprite.spritecollide(sprite, group, False) #returns a list of the sprite conatined in the group that are colliding with sprite
     if collisions:
-        sprite.collision()
+        sprite.collision(damage_taken = Invader.damage)
         for collide in collisions:
             if collide.active == True:
                 collide.collision(damage_taken = sprite.damage)
