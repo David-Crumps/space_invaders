@@ -28,12 +28,14 @@ class SpritePool(pygame.sprite.Group):
         sprite = self.get_inactive_sprite()
         if sprite:
             if self.spawn_strategy:
-                    self.spawn_strategy(sprite, *args, **kwargs)
-            sprite.active = True
+                    spawned = self.spawn_strategy(sprite, *args, **kwargs)
+                    if spawned:
+                        sprite.active = True
             return sprite
         return None
     
-    def check_collision(self, group):
+    #might need to take in a arg/kwarg to call a specific function
+    def check_collision(self, group): #Check if the group calling this function has any sprite colliding with another group
         for sprite in self.sprites():
             if sprite.active:
                 collision_detection(sprite, group)

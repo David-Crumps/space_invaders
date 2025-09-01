@@ -8,6 +8,7 @@ class InvaderSpawnManager:
         random.shuffle(self.spawn_loc)
     
     def __call__(self, sprite, activeSprites):
+        spawnedInvader = False
         if activeSprites:
             for x,y in self.spawn_loc:
                 collision = False
@@ -17,7 +18,10 @@ class InvaderSpawnManager:
                         break
                 if not collision:
                     sprite.rect.center = (x,y)
+                    spawnedInvader = True
                     break
         else:
             sprite.rect.center = self.spawn_loc[0] #If there are no active sprites, add a sprite at the first spawn location
+            spawnedInvader = True
         random.shuffle(self.spawn_loc)
+        return spawnedInvader

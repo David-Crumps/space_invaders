@@ -41,7 +41,7 @@ def main():
     invader_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "invader.png")), (80,80))
 
     invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), image=invader_img, speed=150)
-    for _ in range(12):
+    for _ in range(len(invader_group)):
         invader_group.spawn(invader_group.get_all_active_sprites())
 
     bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), (30,30))
