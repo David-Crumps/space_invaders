@@ -75,10 +75,10 @@ def main():
             if not invader.active:
                 invader_group.spawn(invader_group.get_all_active_sprites())
         
-        invader_group.check_collision(bullet_group)
-        invader_group.check_collision(barrier_group)
-        invader_group.update(dt, screen_height)
+        bullet_group.check_collision(invader_group)
+        barrier_group.check_collision(invader_group)
 
+        invader_group.update(dt, screen_height)
         player.update(dt, keys, screen_width)
         bullet_group.update(dt)
         barrier_group.update()
