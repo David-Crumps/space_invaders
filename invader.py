@@ -26,8 +26,8 @@ class Invader(pygame.sprite.Sprite):
             self.rect = self.rect.move(0, self.speed * dt)
     
     def collision(self, **kwargs):
-        damage = kwargs.get('damage_taken', 0)
-        self.health -= damage
+        damage_taken = kwargs.get('damage_taken', 0)
+        self.health -= damage_taken
 
 
 

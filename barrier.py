@@ -15,4 +15,5 @@ class Barrier(pygame.sprite.Sprite):
             self.active = False
     
     def collision(self, **kwargs):
-        self.health -= 1
+        damage_taken = kwargs.get('damage_taken', 0)
+        self.health -= damage_taken
