@@ -17,7 +17,8 @@ class Invader(pygame.sprite.Sprite):
         self.active = False
 
         self.health = 0
-    
+
+    #if hitting bottom of screen activate flag that ends game.
     def update(self, dt, height):
         if self.rect.bottom > height or self.health <= 0:
             self.active = False
