@@ -6,6 +6,7 @@ from bullet import Bullet
 
 
 class Invader(pygame.sprite.Sprite):
+    damage = 1
     def __init__(self, image, speed):
         super().__init__()
 
@@ -23,10 +24,9 @@ class Invader(pygame.sprite.Sprite):
         else:
             self.rect = self.rect.move(0, self.speed * dt)
     
-    def collision(self):
-        print(f"Prior to collision: {self.health}")
-        self.health -= 1
-        print(f"After collision: {self.health}")
+    def collision(self, **kwargs):
+        damage = kwargs.get('damage_taken', 0)
+        self.health -= damage
 
 
 
