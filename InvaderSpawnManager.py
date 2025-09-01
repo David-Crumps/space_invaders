@@ -18,10 +18,12 @@ class InvaderSpawnManager:
                         break
                 if not collision:
                     sprite.rect.center = (x,y)
+                    sprite.health = 2
                     spawnedInvader = True
                     break
         else:
             sprite.rect.center = self.spawn_loc[0] #If there are no active sprites, add a sprite at the first spawn location
+            sprite.health = 2
             spawnedInvader = True
         random.shuffle(self.spawn_loc)
         return spawnedInvader

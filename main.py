@@ -5,7 +5,8 @@ from invader import Invader
 from sprite_pool import SpritePool
 from InvaderSpawnManager import InvaderSpawnManager
 from bullet import Bullet
-from utils import bullet_spawn_strat
+from utils import bullet_spawn_strat, barrier_spawn_strat, barrier_spawn_loc
+from barrier import Barrier
 import sys
 import json
 import random
@@ -47,7 +48,14 @@ def main():
     bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), (30,30))
     bullet_group = SpritePool(cls=Bullet, size=10, spawn_strategy=bullet_spawn_strat ,image=bullet_img, speed=600)
 
-    del player_img, player_speed, player_start_pos
+    barrier_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "barrier.png")), (80, 80))
+    
+    num_barriers = len(barrier_spawn_loc)
+    barrier_group = SpritePool(cls=Barrier, size = num_barriers, spawn_strategy=barrier_spawn_strat, image = barrier_img)
+    for _ in range(num_barriers):
+        barrier_group.spawn()
+
+    del player_img, player_speed, player_start_pos, num_barriers
 
 
     bullet_cooldown = 250
@@ -68,14 +76,17 @@ def main():
                 invader_group.spawn(invader_group.get_all_active_sprites())
         
         invader_group.check_collision(bullet_group)
+        invader_group.check_collision(barrier_group)
         invader_group.update(dt, screen_height)
 
         player.update(dt, keys, screen_width)
         bullet_group.update(dt)
+        barrier_group.update()
 
         screen.fill("black")
         invader_group.draw(screen)
         screen.blit(player.image, player.rect)
+        barrier_group.draw(screen)
         bullet_group.draw(screen)
         pygame.display.flip()
 

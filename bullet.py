@@ -7,6 +7,7 @@ class Bullet(pygame.sprite.Sprite):
         self.rect = image.get_rect()
         self.speed = speed
         self.damage = 1
+        self.health = 0
         self.active = False
     
     def update(self, dt):
@@ -14,3 +15,7 @@ class Bullet(pygame.sprite.Sprite):
   
         if self.rect.top < 0:
             self.active = False
+    
+    def collision(self):
+        self.active = False
+        
