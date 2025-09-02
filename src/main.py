@@ -10,10 +10,13 @@ from barrier import Barrier
 import sys
 import json
 import random
+from config import PLAYER_PLAYER_SPEED
 
 
 
 def open_configs():
+    x = PLAYER_PLAYER_SPEED
+    print(x)
     try:
         with open("configs.json") as f:
             return json.load(f)
