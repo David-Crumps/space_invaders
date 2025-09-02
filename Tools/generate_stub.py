@@ -6,7 +6,7 @@ from typing import Any
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.abspath(os.path.join(BASE_DIR, '..'))
 CONFIG_PATH = os.path.join(PROJECT_ROOT, 'configs.json')
-STUB_PATH = os.path.join(PROJECT_ROOT, 'configs.pyi')
+STUB_PATH = os.path.join(PROJECT_ROOT, 'src' ,'configs.pyi')
 
 def infer_type(value: Any) -> str:
     if isinstance(value, bool):
