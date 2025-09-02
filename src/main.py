@@ -10,45 +10,33 @@ from barrier import Barrier
 import sys
 import json
 import random
-from config import PLAYER_PLAYER_SPEED
-
-
-
-def open_configs():
-    x = PLAYER_PLAYER_SPEED
-    print(x)
-    try:
-        with open("configs.json") as f:
-            return json.load(f)
-    except FileNotFoundError:
-        print ("File not found, closing program")
-        sys.exit()
+from configs import INVADER_SIZE, BULLET_SIZE, PLAYER_SIZE
 
 #ADD TO CONFIGS, ALSO CREATE A CONFIG.PY WHICH HAS ALL THESE VALUES LOADED TO MAKE MAIN READABLE
 bullet_cooldown = 250
 last_shot_time = 0
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+PROJECT_ROOT = os.path.join(BASE_DIR, '..')
+DATA = os.path.join(PROJECT_ROOT, 'Data')
 
 def main():
     pygame.init()
     clock = pygame.time.Clock()
-    config = open_configs()
-    screen_width, screen_height = config["screen"]["screen_width"], config["screen"]["screen_height"]
-    screen = pygame.display.set_mode((screen_width, screen_height))
+    screen = pygame.display.set_mode((1920, 1080))
 
-    player_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", config["player"]["player_image"])), (80,80))
-    player_speed = config["player"]["player_speed"]
-    player_start_pos = config["player"]["player_start_pos"]
+    player_img = pygame.transform.scale(pygame.image.load(os.path.join(DATA, "player.png")), PLAYER_SIZE)
+    player_speed = 450
 
-    player = Player(player_start_pos, player_img, player_speed)
+    player = Player([960, 1030], player_img, player_speed)
 
-    invader_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "invader.png")), (80,80))
+    invader_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "invader.png")), INVADER_SIZE)
 
     invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), image=invader_img, speed=150)
     for _ in range(len(invader_group)):
         invader_group.spawn(invader_group.get_all_active_sprites())
 
-    bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), (30,30))
+    bullet_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "bullet.png")), BULLET_SIZE)
     bullet_group = SpritePool(cls=Bullet, size=10, spawn_strategy=bullet_spawn_strat ,image=bullet_img, speed=600)
 
     barrier_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "barrier.png")), (80, 80))
@@ -58,7 +46,7 @@ def main():
     for _ in range(num_barriers):
         barrier_group.spawn()
 
-    del player_img, player_speed, player_start_pos, num_barriers
+    del player_img, player_speed, num_barriers
 
 
     bullet_cooldown = 250
@@ -81,8 +69,8 @@ def main():
         bullet_group.check_collision(invader_group)
         barrier_group.check_collision(invader_group)
 
-        invader_group.update(dt, screen_height)
-        player.update(dt, keys, screen_width)
+        invader_group.update(dt, 1080)
+        player.update(dt, keys, 1920)
         bullet_group.update(dt)
         barrier_group.update()
 
