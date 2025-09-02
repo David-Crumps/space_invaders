@@ -1,16 +1,14 @@
 import pygame
-import os
 import random
-from typing import cast
-from bullet import Bullet
+
 
 
 class Invader(pygame.sprite.Sprite):
     damage = 1
-    def __init__(self, image, speed):
+    def __init__(self, images, speed):
         super().__init__()
 
-        self.image = image
+        self.image = random.choice(images)
         self.rect = self.image.get_rect()
 
         self.speed = speed
