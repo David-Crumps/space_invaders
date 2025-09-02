@@ -10,7 +10,7 @@ from barrier import Barrier
 import sys
 import json
 import random
-from configs import INVADER_SIZE, BULLET_SIZE, PLAYER_SIZE
+from configs import INVADER_SIZE, BULLET_SIZE, PLAYER_SIZE, INVADER_IMAGES
 
 #ADD TO CONFIGS, ALSO CREATE A CONFIG.PY WHICH HAS ALL THESE VALUES LOADED TO MAKE MAIN READABLE
 bullet_cooldown = 250
@@ -30,9 +30,9 @@ def main():
 
     player = Player([960, 1030], player_img, player_speed)
 
-    invader_img = pygame.transform.scale(pygame.image.load(os.path.join("Data", "invader.png")), INVADER_SIZE)
+    invader_imgs = [pygame.transform.scale(pygame.image.load(os.path.join("Data", img)), INVADER_SIZE) for img in INVADER_IMAGES]
 
-    invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), image=invader_img, speed=150)
+    invader_group = SpritePool(cls=Invader, size = 12, spawn_strategy=InvaderSpawnManager(), images=invader_imgs, speed=150)
     for _ in range(len(invader_group)):
         invader_group.spawn(invader_group.get_all_active_sprites())
 
@@ -83,6 +83,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    #need to finish configs.json and create configs.py otherwise barrier working, invader working, bullet working, pierce works better as a flag not as health
-    #can' think of much else, tbh, other than if an invader hits the end of the screen you get game over, maybe track kills
