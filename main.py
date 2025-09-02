@@ -92,3 +92,6 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+    #need to finish configs.json and create configs.py otherwise barrier working, invader working, bullet working, pierce works better as a flag not as health
+    #can' think of much else, tbh, other than if an invader hits the end of the screen you get game over, maybe track kills
