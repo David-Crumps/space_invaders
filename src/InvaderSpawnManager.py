@@ -1,10 +1,9 @@
-import pygame
 import random
-
+from configs import LANES_WIDTH, LANES_START_X_POS, LANES_LAST_X_POS, LANES_TOP_Y_POS
 
 class InvaderSpawnManager:
-    def __init__(self, slot_width=95, x_min=50, x_max = 1870, y = 50):
-        self.spawn_loc = [(x,y) for x in range (x_min, x_max, slot_width)]
+    def __init__(self):
+        self.spawn_loc = [(x,LANES_TOP_Y_POS) for x in range (LANES_START_X_POS, LANES_LAST_X_POS, LANES_WIDTH)]
         random.shuffle(self.spawn_loc)
     
     def __call__(self, sprite, activeSprites):
