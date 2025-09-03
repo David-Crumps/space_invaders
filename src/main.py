@@ -11,10 +11,6 @@ from barrier import Barrier
 import sys
 from configs import *
 
-#REMOVE ALL HARDCODED VALUES AND REPLACE WITH CONFIGS VALUES, AND THATS ABOUT IT.
-bullet_cooldown = 250
-last_shot_time = 0
-
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.join(BASE_DIR, '..')
 DATA = os.path.join(PROJECT_ROOT, 'Data')
