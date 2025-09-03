@@ -68,7 +68,8 @@ def main():
             click_text_rect.midtop = (game_over_text_rect.midbottom)
             while True:
                 for event in pygame.event.get():
-                    if event.type == pygame.QUIT or pygame.MOUSEBUTTONDOWN:
+                    if event.type in (pygame.QUIT, pygame.MOUSEBUTTONDOWN):
+                        print("exiting")
                         pygame.quit()
                         sys.exit()
 
