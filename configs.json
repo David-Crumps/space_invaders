@@ -8,9 +8,9 @@
   "screen": {
     "image": "background.jpg",
     "top": 0,
-    "bottom": 1920,
+    "bottom": 1080,
     "left": 0,
-    "right": 1080,
+    "right": 1920,
     "width": 1920,
     "height": 1080
   },
