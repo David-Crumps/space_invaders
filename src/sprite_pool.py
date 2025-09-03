@@ -1,8 +1,4 @@
 import pygame
-import os
-from InvaderSpawnManager import InvaderSpawnManager
-from bullet import Bullet
-from invader import Invader
 from utils import collision_detection
 
 
@@ -33,9 +29,12 @@ class SpritePool(pygame.sprite.Group):
                         sprite.active = True
             return sprite
         return None
-    
-    #might need to take in a arg/kwarg to call a specific function
-    def check_collision(self, group): #Check if the group calling this function has any sprite colliding with another group
+    def set_all_inactive(self):
+        for sprite in self.sprites():
+            if sprite.active:
+                sprite.active = False
+
+    def check_collision(self, group):
         for sprite in self.sprites():
             if sprite.active:
                 collision_detection(sprite, group)
