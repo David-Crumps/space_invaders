@@ -65,7 +65,6 @@ def main():
             while True:
                 for event in pygame.event.get():
                     if event.type in (pygame.QUIT, pygame.MOUSEBUTTONDOWN):
-                        print("exiting")
                         pygame.quit()
                         sys.exit()
 
