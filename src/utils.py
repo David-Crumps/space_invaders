@@ -1,14 +1,11 @@
 import pygame
 from invader import Invader
+from configs import LANES_WIDTH, LANES_BOTTOM_Y_POS, LANES_LAST_X_POS, LANES_START_X_POS
 
-#move to configs
-slot_width=95 
-x_min=50
-x_max = 1870
-y = 950
-barrier_spawn_loc = [(x,y) for x in range(x_min, x_max, slot_width)]
 
-#when the sprite is invader and the group is bullet/barrier it creates a number of anomalies
+BARRIER_SPAWN_LOC = [(x,LANES_BOTTOM_Y_POS) for x in range(LANES_START_X_POS, LANES_LAST_X_POS, LANES_WIDTH)]
+
+
 def collision_detection(sprite, group):
     collisions = pygame.sprite.spritecollide(sprite, group, False) #returns a list of the sprite conatined in the group that are colliding with sprite
     if collisions:
@@ -25,9 +22,9 @@ def bullet_spawn_strat(bullet, player):
 
 
 def barrier_spawn_strat(barrier):
-    barrier.rect.center = barrier_spawn_loc[-1]
+    barrier.rect.center = BARRIER_SPAWN_LOC[-1]
     spawned_barrier = True
-    barrier_spawn_loc.pop()
+    BARRIER_SPAWN_LOC.pop()
     return spawned_barrier
     
 
