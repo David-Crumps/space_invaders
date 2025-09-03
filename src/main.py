@@ -88,12 +88,12 @@ def main():
         bullet_group.check_collision(invader_group)
         barrier_group.check_collision(invader_group)
 
-        invader_group.update(dt, 1080)
-        player.update(dt, keys, 1920)
+        invader_group.update(dt, SCREEN_BOTTOM)
+        player.update(dt, keys)
         bullet_group.update(dt)
         barrier_group.update()
 
-        screen.blit(screen_img, (0,0))
+        screen.blit(screen_img, (SCREEN_LEFT,SCREEN_TOP))
         invader_group.draw(screen)
         screen.blit(player.image, player.rect)
         barrier_group.draw(screen)
