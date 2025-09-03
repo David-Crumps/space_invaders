@@ -1,5 +1,6 @@
 import pygame
 import os
+from configs import SCREEN_LEFT, SCREEN_RIGHT
 
 class Player(pygame.sprite.Sprite):
     def __init__(self, start_cords, image, speed):
@@ -12,7 +13,7 @@ class Player(pygame.sprite.Sprite):
         self.rect = self.image.get_rect(center=(x,y))
         self.speed = speed
     
-    def update(self, dt, keys, width):
+    def update(self, dt, keys):
         movement = 0
         if (keys[pygame.K_LEFT]):
             movement = -self.speed
@@ -20,9 +21,9 @@ class Player(pygame.sprite.Sprite):
             movement = self.speed
         self.rect = self.rect.move(movement*dt, 0)
 
-        if self.rect.left < 0:
-            self.rect.left = 0
-        if self.rect.right > width:
-            self.rect.right = width
+        if self.rect.left < SCREEN_LEFT:
+            self.rect.left = SCREEN_LEFT
+        if self.rect.right > SCREEN_RIGHT:
+            self.rect.right = SCREEN_RIGHT
 
         
