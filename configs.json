@@ -1,11 +1,12 @@
 {
   "player": {
-    "speed": 450,
+    "speed": 550,
     "start_pos": [960, 1030],
     "image": "player.png",
     "size": [80, 80]
   },
   "screen": {
+    "image": "background.jpg",
     "top": 0,
     "bottom": 1920,
     "left": 0,
@@ -15,12 +16,13 @@
   },
   "bullet": {
     "speed": 600,
-    "cooldown": 250,
+    "cooldown": 200,
     "image": "bullet.png",
-    "size": [30, 30]
+    "size": [30, 30],
+    "magazine_size": 10
   },
   "invader": {
-    "speed": 150,
+    "speed": 100,
     "images": [
       "invader.png",
       "invader_2.png",
@@ -28,10 +30,18 @@
       "invader_4.png",
       "invader_5.png"
     ],
-    "size": [80, 80]
+    "size": [80, 80],
+    "spawn_limit": 15
   },
   "barrier": {
     "image": "barrier.png",
     "size": [80, 80]
+  },
+  "lanes": {
+    "width": 95,
+    "start_x_pos": 50,
+    "last_x_pos": 1870,
+    "top_y_pos": 50,
+    "bottom_y_pos": 950
   }
 }
